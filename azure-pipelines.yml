@@ -1,17 +1,12 @@
 trigger:
-- main
+  branches:
+    include:
+      - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: git checkout $(Build.SourceBranch)
-  displayName: 'Checkout Code'
-  
-- task: UseNode@1
-  inputs:
-    version: '14.x'
-
 - script: npm install
   displayName: 'Install Dependencies'
 
@@ -19,4 +14,4 @@ steps:
   displayName: 'Run Tests'
 
 - script: npm run build
-  displayName: 'Build the Project'
+  displayName: 'Build Project'
