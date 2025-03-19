@@ -6,7 +6,8 @@
     "build": "webpack"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "path-browserify": "^1.0.1"
   },
   "devDependencies": {
     "jest": "^29.7.0",
