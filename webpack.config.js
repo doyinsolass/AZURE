@@ -1,22 +1,28 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  mode: 'development', // or 'production'
+  entry: './src/index.js', // Adjust to your entry point
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
     fallback: {
-      path: require.resolve('path-browserify') // Add this line
-    }
+      path: require.resolve('path-browserify'),
+    },
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
     ],
   },
