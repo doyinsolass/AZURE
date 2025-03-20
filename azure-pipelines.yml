@@ -1,17 +1,31 @@
-trigger:
-  branches:
-    include:
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
       - main
 
-pool:
-  vmImage: 'ubuntu-latest'
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-steps:
-- script: npm install
-  displayName: 'Install Dependencies'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-- script: npm test
-  displayName: 'Run Tests'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
 
-- script: npm run build
-  displayName: 'Build Project'
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build Project
+        run: npm run build
